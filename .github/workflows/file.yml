@@ -1,5 +1,6 @@
 name: Some-name
-
+env:
+    GITHUB_ACTOR: ${{ github.event.commits[0].author.name }}
 on: [push]
 
 jobs:
@@ -8,4 +9,4 @@ jobs:
 
         steps:
             - name: Dump Github Context
-              run : echo ${{ toJson(github) }}
+              run : echo "$GITHUB_ACTOR"
