@@ -1,1 +1,11 @@
+name: Some-name
 
+on: [push]
+
+jobs:
+    Get-info-from-github:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Dump Github Context
+              run : echo ${{ toJson(github) }}
