@@ -9,4 +9,5 @@ jobs:
 
         steps:
             - name: Dump Github Context
-              run : echo "$GITHUB_ACTOR"
+              #run : echo "$GITHUB_ACTOR"
+              run : echo "Message from repo"
