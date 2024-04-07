@@ -1,6 +1,5 @@
 name: Some-name
-env:
-    GITHUB_ACTOR: ${{ github.event.commits[0].author.name }}
+
 on: [push]
 
 jobs:
@@ -8,6 +7,7 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - name: Dump Github Context
-              #run : echo "$GITHUB_ACTOR"
-              run : echo "Message from repo"
+            - name: Get Runner Context
+              env :
+                RUNNER_CONTEXT: ${{ toJson(runner) }}
+              run : echo "$RUNNER_CONTEXT"  
