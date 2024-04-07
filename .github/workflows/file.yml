@@ -1,6 +1,12 @@
-name: Some-name3
+name: Build and push of Docker image
 
-on: [push]
+on:
+    workflow_dispatch: 
+        inputs:
+          environment:
+            description: "Value for tag"
+            required: true
+            default: "default-tag"
 
 jobs:
     Get-info-from-github:
@@ -21,4 +27,7 @@ jobs:
             - name: Get Runner Context
               env :
                 RUNNER_CONTEXT: ${{ toJson(runner) }}
-              run : echo "$RUNNER_CONTEXT"  
+              run : echo "$RUNNER_CONTEXT" 
+              
+            - name: Print input value
+              run : echo "${{ github.event.inputs.environment }}"  
