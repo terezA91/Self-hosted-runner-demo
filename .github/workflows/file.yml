@@ -3,10 +3,13 @@ name: Build and push of Docker image
 on:
     workflow_dispatch: 
         inputs:
-          environment:
-            description: "Value for tag"
+          tag_value:
+            description: "Value for tag of image"
             required: true
             default: "default-tag"
+
+env:
+    TAG: ${{ github.event.inputs.tag_value }}            
 
 jobs:
     Get-info-from-github:
@@ -17,12 +20,12 @@ jobs:
               uses: actions/checkout@v4.1.1
 
             - name: Build of docker image
-              run : docker build -t terezabisharyan/some-image:some-tag .
+              run : docker build -t terezabisharyan/some-image:$TAG .
               
             - name: Push image on Docker Hub
               run : |
                 docker login -u terezabisharyan -p ${{ secrets.DOCKER_HUB_PSW }}
-                docker push terezabisharyan/some-image:some-tag
+                docker push terezabisharyan/some-image:$TAG
 
             - name: Get Runner Context
               env :
