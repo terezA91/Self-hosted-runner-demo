@@ -1,19 +1,19 @@
 name: Build and push of Docker image
 
+env:
+    TAG: ${{ github.event.inputs.tag_value }}
+    DEFAULT_TAG: ${{ github.sha }}
+
 on:
     workflow_dispatch: 
         inputs:
           tag_value:
             description: "Value for tag of image"
             required: true
-            default: "default-tag"
-
-env:
-    TAG: ${{ github.event.inputs.tag_value }}          
-    #VAL: ${{  }}
+            default: default_tag
 
 jobs:
-    Get-info-from-github:
+    Docker-build-and-push:
         runs-on: self-hosted
 
         steps:
@@ -33,5 +33,3 @@ jobs:
                 RUNNER_CONTEXT: ${{ toJson(runner) }}
               run : echo "$RUNNER_CONTEXT" 
             
-            - name: Get data from Github Context
-              run : echo " SHA is --- ${{ github.sha }}"
