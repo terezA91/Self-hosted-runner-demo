@@ -7,6 +7,17 @@ jobs:
         runs-on: self-hosted
 
         steps:
+            - name: Checkout
+              uses: actions/checkout@v4.1.1
+
+            - name: Build of docker image
+              run : docker build -t terezabisharyan/some-image:some-tag .
+              
+            - name: Push image on Docker Hub
+              run : |
+                docker login -u terezabisharyan -p ${{ secrets.DOCKER_HUB_PSW }}
+                docker push terezabisharyan/some-image:some-tag
+
             - name: Get Runner Context
               env :
                 RUNNER_CONTEXT: ${{ toJson(runner) }}
