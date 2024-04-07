@@ -33,5 +33,5 @@ jobs:
                 RUNNER_CONTEXT: ${{ toJson(runner) }}
               run : echo "$RUNNER_CONTEXT" 
             
-            - name: Get Github Context
-              run : echo "${{toJson(github)}}"
+            - name: Get data from Github Context
+              run : echo " SHA is --- ${{ github.sha }}"
