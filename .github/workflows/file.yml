@@ -9,7 +9,8 @@ on:
             default: "default-tag"
 
 env:
-    TAG: ${{ github.event.inputs.tag_value }}            
+    TAG: ${{ github.event.inputs.tag_value }}          
+    #VAL: ${{  }}
 
 jobs:
     Get-info-from-github:
@@ -31,6 +32,6 @@ jobs:
               env :
                 RUNNER_CONTEXT: ${{ toJson(runner) }}
               run : echo "$RUNNER_CONTEXT" 
-              
-            - name: Print input value
-              run : echo "${{ github.event.inputs.environment }}"  
+            
+            - name: Get Github Context
+              run : echo "${{toJson(github)}}"
